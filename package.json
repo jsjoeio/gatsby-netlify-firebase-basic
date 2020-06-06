@@ -8,15 +8,18 @@
     "develop": "gatsby develop",
     "start": "run-p start:**",
     "start:app": "npm run develop",
-    "start:lambda": "netlify-lambda serve functions",
+    "start:lambda": "netlify-lambda serve --config ./config/webpack.functions.js functions",
     "build": "gatsby build && netlify-lambda build functions",
     "build:app": "gatsby build",
-    "build:lambda": "netlify-lambda build functions"
+    "build:lambda": "netlify-lambda build --config ./config/webpack.functions.js functions"
   },
   "dependencies": {
+    "dotenv-webpack": "^1.8.0",
+    "firebase-admin": "^8.12.1",
     "gatsby": "^2.22.15",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
     "http-proxy-middleware": "^1.0.4",
