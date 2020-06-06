@@ -4,6 +4,7 @@ A simple example to reproduce issues I'm facing trying to get Firebase and Netli
 
 ## Prerequisites
 
+- Netlify account
 - Firebase account
 - Firebase project
 - Service account credentials
@@ -22,11 +23,20 @@ When the `/increment?id=test` function endpoint is hit, it should increment `tes
 3. `yarn`
 4. Duplicate `.env.example` as `.env` and update values (see photo above)
 5. `yarn start`
-6. Navigate to http://localhost:8000/.netlify/functions/increment?id=test
+6. Navigate to [http://localhost:8000/.netlify/functions/increment?id=test](http://localhost:8000/.netlify/functions/increment?id=tes)
 
-
+If it is working as expected, you should see "totalViews" increment each time you hit that endpoint.
 
 ## Reproducing issue in Production Environment
+
+1. Connect git repo with Netlify
+2. Deploy site
+3. Add environment variables
+4. Test
+
+### Expected Results
+
+### Actual Results
 
 ## Resources
 
