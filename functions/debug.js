@@ -3,7 +3,8 @@ exports.handler = async (event, context) => {
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: "debugging in prod",
+      message:
+        "Netlify Functions are working correctly if you see this message.",
     }),
   }
 }
