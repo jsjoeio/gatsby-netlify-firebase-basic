@@ -10,7 +10,21 @@ A simple example to reproduce issues I'm facing trying to get Firebase and Netli
 
 [This guide](https://leerob.io/blog/real-time-post-views#setting-up-firebase) walks you through setting Firebase up.
 
+Here is a screenshot of the database set up:
+![database example](./db-example.png)
+
+When the `/increment?id=test` function endpoint is hit, it should increment `test` under "wizardly-hugle-63a3eb-dot-com".
+
 ## Local Development
+
+1. `git clone https://github.com/jsjoeio/gatsby-netlify-firebase-basic.git`
+2. `cd gatsby-netlify-firebase-basic`
+3. `yarn`
+4. Duplicate `.env.example` as `.env` and update values (see photo above)
+5. `yarn start`
+6. Navigate to http://localhost:8000/.netlify/functions/increment?id=test
+
+
 
 ## Reproducing issue in Production Environment
 
