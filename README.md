@@ -32,6 +32,9 @@ If it is working as expected, you should see "totalViews" increment each time yo
 1. Connect git repo with Netlify
 2. Deploy site
 3. Add environment variables
+
+_Note: when you add the `FIREBASE_PRIVATE_KEY` as an env variable, make sure it is inside quotes_
+
 4. Test
 
 ### Expected Results
