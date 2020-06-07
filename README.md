@@ -34,6 +34,12 @@ If it is working as expected, you should see "totalViews" increment each time yo
 3. Add environment variables
 4. Test
 
+_Note: "Firebase Admin SDK requires Node v10 for it to work. By default, Netlify Lambda runs in Node v8 so we'll need to add an environment file that tells Netlify to use v10 on the Lambda instance instead"_
+
+Make sure that you add the enivronment `AWS_LAMBDA_JS_RUNTIME` with the value `nodejs10.x`.
+
+Source: [Using Firebase Admin SDK with Netlify Lambda Functions](https://jackwhiting.co.uk/posts/using-firebase-admin-sdk-with-netlify-lambda-functions/)
+
 ### Expected Results
 
 ### Actual Results
