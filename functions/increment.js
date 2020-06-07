@@ -1,8 +1,22 @@
-import firebaseDb from "../src/lib/db-admin"
+const admin = require("firebase-admin")
 
-exports.handler = async (event, context, callback) => {
-  context.callbackWaitsForEmptyEventLoop = false
-  const db = firebaseDb.database()
+// Due to the way the key is provided by Netlify
+// in production, we need to use the ternary
+const config = {
+  credential: admin.credential.cert({
+    client_email: process.env.FIREBASE_CLIENT_EMAIL,
+    private_key:
+      process.env.FIREBASE_PRIVATE_KEY[0] === "-"
+        ? process.env.FIREBASE_PRIVATE_KEY
+        : JSON.parse(process.env.FIREBASE_PRIVATE_KEY),
+    project_id: process.env.FIREBASE_PROJECT_ID,
+  }),
+  databaseURL: process.env.FIREBASE_DATABASE_URL,
+}
+
+admin.initializeApp(config)
+
+exports.handler = async (event, context) => {
   const { id } = event.queryStringParameters
   if (!id) {
     return {
@@ -13,7 +27,7 @@ exports.handler = async (event, context, callback) => {
     }
   }
 
-  const ref = db.ref(process.env.FIREBASE_DB_TABLE_NAME).child(id)
+  const ref = admin.database().ref(process.env.FIREBASE_DB_TABLE_NAME).child(id)
   const { snapshot } = await ref.transaction(currentViews => {
     if (currentViews === null) {
       return 1
@@ -22,11 +36,11 @@ exports.handler = async (event, context, callback) => {
     return currentViews + 1
   })
 
-  callback(null, {
+  return {
     statusCode: 200,
     body: JSON.stringify({
       pageId: id,
       totalViews: snapshot.val(),
     }),
-  })
+  }
 }
