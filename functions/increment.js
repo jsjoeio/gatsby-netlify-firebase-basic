@@ -1,6 +1,7 @@
 import firebaseDb from "../src/lib/db-admin"
 
-exports.handler = async (event, context) => {
+exports.handler = async (event, context, callback) => {
+  context.callbackWaitsForEmptyEventLoop = false
   const db = firebaseDb.database()
   const { id } = event.queryStringParameters
   if (!id) {
@@ -21,11 +22,11 @@ exports.handler = async (event, context) => {
     return currentViews + 1
   })
 
-  return {
+  callback(null, {
     statusCode: 200,
     body: JSON.stringify({
       pageId: id,
       totalViews: snapshot.val(),
     }),
-  }
+  })
 }
